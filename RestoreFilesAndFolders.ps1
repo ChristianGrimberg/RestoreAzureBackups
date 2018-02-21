@@ -3,12 +3,11 @@
 
 # Message to user
 $MessagePassword = "Imput Password of "
+$MessageThanks = "Thank You!"
 
 # Location to restore the data
-$DestinationRestoredData = "C:\RestoredData"
-
-# Trigger the process of restore
-$RecoveryOption = New-OBRecoveryOption -DestinationPath $DestinationRestoredData -OverwriteType Skip
+$DestinationRestoredData = "C:\RestoredData\"
+$NumberFolder = 0
 
 # Download the credential vault to C:\Vaults and named as credentials.VaultCredentials
 $FileVault = "C:\Vaults\credentials.VaultCredentials"
@@ -21,7 +20,8 @@ $CBBackupServers = $ArrayBackupServer[2]
 foreach ($BackupServer in $CBBackupServers)
 {
     # Imput Password
-    $MessagePassword + $BackupServer.ServerName + ": "
+    $ServerName = $BackupServer.ServerName
+    $MessagePassword + $ServerName + ": "
     $SecureString = Read-Host -AsSecureString
     $MessageThanks
     
@@ -38,6 +38,15 @@ foreach ($BackupServer in $CBBackupServers)
     {
         # Obtain all the folders of volume items
         $FolderRecover = Get-OBRecoverableItem $FilesFolders
+
+        #Increment the number of folder
+        $NumberFolder++
+
+        #Define the Folder
+        $FolderRestoredData = $DestinationRestoredData + $NumberFolder
+
+        # Trigger the process of restore
+        $RecoveryOption = New-OBRecoveryOption -DestinationPath $FolderRestoredData -OverwriteType Skip
 
         foreach ($FilesRecover in $FolderRecover)
         {

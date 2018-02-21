@@ -1,5 +1,5 @@
 # Login into Azure with a account
-$Credential = Login-AzureRmAccount
+Login-AzureRmAccount
 
 # Use your Suscription by Name
 $MessageSuscription = "Input Name of Suscription: "
