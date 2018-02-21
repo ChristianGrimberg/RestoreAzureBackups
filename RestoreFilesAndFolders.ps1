@@ -5,8 +5,15 @@ $ArrayBackupServer = Get-OBAlternateBackupServer -VaultCredentials $File
 # Array list to all Microsoft.Internal.CloudBackup.ObjectModel.OMCommon.CBBackupServer
 $CBBackupServers = $ArrayBackupServer[2]
 
-# List all CBBackupServers
+# List all items in the retention backup to restore
 foreach ($BackupServer in $CBBackupServers)
 {
-    Get-OBRecoverableSource -Server $BackupServer
+    $Source = Get-OBRecoverableSource -Server $BackupServer
+    
+    foreach ($RecoverableVolume in $Source)
+    {
+        $RecoverableItem = Get-OBRecoverableItem -Source $RecoverableVolume
+    }
+
+    $RecoverableItem
 }
