@@ -4,4 +4,5 @@ Scripts to restore all the backups in the retention policy in Azure Backup Servi
 
 # Documentacion and links
 https://docs.microsoft.com/en-us/azure/backup/backup-client-automation
+
 https://technet.microsoft.com/es-es/library/hh770400.aspx
