@@ -6,7 +6,7 @@ $MessagePassword = "Imput Password of "
 $MessageThanks = "Thank You!"
 
 # Location to restore the data
-$DestinationRestoredData = "C:\RestoredData\"
+$DestinationRestoredData = "D:\RestoredData\"
 $NumberFolder = 0
 
 # Download the credential vault to C:\Vaults and named as credentials.VaultCredentials
@@ -43,7 +43,7 @@ foreach ($BackupServer in $CBBackupServers)
         $NumberFolder++
 
         #Define the Folder
-        $FolderRestoredData = $DestinationRestoredData + $NumberFolder
+        $FolderRestoredData = $DestinationRestoredData + $ServerName + "\" + $NumberFolder
 
         # Trigger the process of restore
         $RecoveryOption = New-OBRecoveryOption -DestinationPath $FolderRestoredData -OverwriteType Skip
