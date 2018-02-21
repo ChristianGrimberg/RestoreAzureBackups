@@ -2,7 +2,7 @@
 
 Scripts to restore all the backups in the retention policy of Azure Backup Service Vault
 
-Please Run the script in Powershell called .\RestoreFilesAndFolders.ps1
+Please Run the script in Powershell called <b>.\RestoreFilesAndFolders.ps1</b>
 
 # Documentation and links
 https://docs.microsoft.com/en-us/azure/backup/backup-client-automation

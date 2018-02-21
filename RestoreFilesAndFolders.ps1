@@ -47,3 +47,6 @@ foreach ($BackupServer in $CBBackupServers)
         }       
     }
 }
+
+# Disconnect of Azure
+.\TenantDisconnect.ps1
