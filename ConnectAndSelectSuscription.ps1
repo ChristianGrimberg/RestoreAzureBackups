@@ -1,11 +1,13 @@
 # Login into Azure with a account
-Login-AzureRmAccount
-# Use your Suscription by Name
-$subscriptionName = "Azure bajo licencia Open"
-# Set the correct suscription where revovery service vault exist
-Set-AzureRmContext -Subscription $subscriptionName
-Select-AzureRmSubscription -SubscriptionName $subscriptionName
-# Query Service Vaults
-$Resource = Get-AzureRmRecoveryServicesVault -ResourceGroupName "Default-RecoveryServices-ResourceGroup-brazilsouth"
-$Resource
+$Credential = Login-AzureRmAccount
 
+# Use your Suscription by Name
+$MessageSuscription = "Input Name of Suscription: "
+$MessageThanks = "Thank You!"
+$MessageSuscription
+$SuscriptionName = Read-Host
+$MessageThanks
+
+# Set the correct suscription where revovery service vault exist
+Set-AzureRmContext -Subscription $SuscriptionName
+Select-AzureRmSubscription -SubscriptionName $SuscriptionName
