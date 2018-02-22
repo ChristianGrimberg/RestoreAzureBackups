@@ -37,9 +37,6 @@ foreach ($FilesFolders in $RecoverableItem)
     # Obtain all the folders of volume items
     $FolderRecover = Get-OBRecoverableItem $FilesFolders
 
-    #Increment the number of folder
-    $NumberFolder++
-
     #Define the Folder
     $FolderRestoredData = $DestinationRestoredData + $Server + "\" + $NumberFolder
 
@@ -51,5 +48,8 @@ foreach ($FilesFolders in $RecoverableItem)
         $ItemRecover = Get-OBRecoverableItem $FilesRecover
 
         Start-OBRecovery -RecoverableItem $ItemRecover -RecoveryOption $RecoveryOption -EncryptionPassphrase $SecureString
+
+        #Increment the number of folder
+        $NumberFolder++
     }       
 }
