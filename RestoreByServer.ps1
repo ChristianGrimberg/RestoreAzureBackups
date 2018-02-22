@@ -22,7 +22,7 @@ $SecureString = Read-Host -AsSecureString
 $MessageThanks
 
 # Obtain the source of backup server
-$CBBackupServer = $BackupServer[2] | where {$_.ServerName -eq $Server}
+$CBBackupServer = $BackupServer[2] | Where-Object {$_.ServerName -eq $Server}
 $Source = Get-OBRecoverableSource -Server $CBBackupServer
 $Source
 
