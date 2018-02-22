@@ -23,3 +23,8 @@ $Server = Read-Host
 $MessageThanks
 $FileVault = "C:\Vaults\credentials.VaultCredentials"
 $BackupServer = Get-OBAlternateBackupServer -VaultCredentials $FileVault -Name $Server
+
+# Imput Password of Server
+$MessagePassword + $Server + ": "
+$SecureString = Read-Host -AsSecureString
+$MessageThanks
