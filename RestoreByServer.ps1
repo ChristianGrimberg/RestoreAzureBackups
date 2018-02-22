@@ -5,7 +5,7 @@
 $MessagePassword = "Imput Password of "
 $MessageServer = "Input Name of Server: "
 $MessageThanks = "Thank You!"
-$DestinationRestoredData = "C:\RestoredData\"
+$DestinationRestoredData = "D:\RestoredData\"
 $NumberFolder = 0
 
 # Select the Server
