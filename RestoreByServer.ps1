@@ -53,3 +53,6 @@ foreach ($FilesFolders in $RecoverableItem)
         $NumberFolder++
     }       
 }
+
+# Disconnect of Azure
+.\TenantDisconnect.ps1
