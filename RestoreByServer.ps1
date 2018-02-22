@@ -22,9 +22,14 @@ $MessageServer
 $Server = Read-Host
 $MessageThanks
 $FileVault = "C:\Vaults\credentials.VaultCredentials"
-$BackupServer = Get-OBAlternateBackupServer -VaultCredentials $FileVault -Name $Server
+$BackupServer = Get-OBAlternateBackupServer -VaultCredentials $FileVault
 
 # Imput Password of Server
 $MessagePassword + $Server + ": "
 $SecureString = Read-Host -AsSecureString
 $MessageThanks
+
+# Obtain the source of backup server
+$CBBackupServer = $BackupServer[2] | where {$_.ServerName -eq $Server}
+$Source = Get-OBRecoverableSource -Server $CBBackupServer
+$Source
