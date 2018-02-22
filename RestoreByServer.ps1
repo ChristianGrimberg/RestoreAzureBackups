@@ -1,20 +1,12 @@
 # Connect to Azure and select the correct 
-#.\ConnectAndSelectSuscription.ps1
+.\ConnectAndSelectSuscription.ps1
 
 # Declare message imput to users
-$MessageVault = "Input Name of Service Vault: "
 $MessagePassword = "Imput Password of "
 $MessageServer = "Input Name of Server: "
 $MessageThanks = "Thank You!"
-$DestinationRestoredData = "D:\RestoredData\"
+$DestinationRestoredData = "C:\RestoredData\"
 $NumberFolder = 0
-
-# Select the Service Vault by user
-$MessageVault
-$VaultName = Read-Host
-$MessageThanks
-$Vault = Get-AzureRmRecoveryServicesVault -Name $VaultName
-Set-AzureRmRecoveryServicesVaultContext -Vault $Vault
 
 # Select the Server
 # Download the credential vault to C:\Vaults and named as credentials.VaultCredentials
@@ -33,3 +25,31 @@ $MessageThanks
 $CBBackupServer = $BackupServer[2] | where {$_.ServerName -eq $Server}
 $Source = Get-OBRecoverableSource -Server $CBBackupServer
 $Source
+
+foreach ($RecoverableVolume in $Source)
+{
+    # Obtain all volume item of BackupServers
+    $RecoverableItem = Get-OBRecoverableItem -Source $RecoverableVolume
+}
+
+foreach ($FilesFolders in $RecoverableItem)
+{
+    # Obtain all the folders of volume items
+    $FolderRecover = Get-OBRecoverableItem $FilesFolders
+
+    #Increment the number of folder
+    $NumberFolder++
+
+    #Define the Folder
+    $FolderRestoredData = $DestinationRestoredData + $Server + "\" + $NumberFolder
+
+    # Trigger the process of restore
+    $RecoveryOption = New-OBRecoveryOption -DestinationPath $FolderRestoredData -OverwriteType Skip
+
+    foreach ($FilesRecover in $FolderRecover)
+    {
+        $ItemRecover = Get-OBRecoverableItem $FilesRecover
+
+        Start-OBRecovery -RecoverableItem $ItemRecover -RecoveryOption $RecoveryOption -EncryptionPassphrase $SecureString
+    }       
+}
