@@ -30,28 +30,28 @@ foreach ($RecoverableVolume in $Source)
 {
     # Obtain all volume item of BackupServers
     $RecoverableItem = Get-OBRecoverableItem -Source $RecoverableVolume
-}
 
-foreach ($FilesFolders in $RecoverableItem)
-{
-    # Obtain all the folders of volume items
-    $FolderRecover = Get-OBRecoverableItem $FilesFolders
-
-    #Define the Folder
-    $FolderRestoredData = $DestinationRestoredData + $Server + "\" + $NumberFolder
-
-    # Trigger the process of restore
-    $RecoveryOption = New-OBRecoveryOption -DestinationPath $FolderRestoredData -OverwriteType Skip
-
-    foreach ($FilesRecover in $FolderRecover)
+    foreach ($FilesFolders in $RecoverableItem)
     {
-        $ItemRecover = Get-OBRecoverableItem $FilesRecover
+        # Obtain all the folders of volume items
+        $FolderRecover = Get-OBRecoverableItem $FilesFolders
 
-        Start-OBRecovery -RecoverableItem $ItemRecover -RecoveryOption $RecoveryOption -EncryptionPassphrase $SecureString
+        #Define the Folder
+        $FolderRestoredData = $DestinationRestoredData + $Server + "\" + $NumberFolder
 
-        #Increment the number of folder
-        $NumberFolder++
-    }       
+        # Trigger the process of restore
+        $RecoveryOption = New-OBRecoveryOption -DestinationPath $FolderRestoredData -OverwriteType Skip
+
+        foreach ($FilesRecover in $FolderRecover)
+        {
+            $ItemRecover = Get-OBRecoverableItem $FilesRecover
+
+            Start-OBRecovery -RecoverableItem $ItemRecover -RecoveryOption $RecoveryOption -EncryptionPassphrase $SecureString
+
+            #Increment the number of folder
+            $NumberFolder++
+        }       
+    }
 }
 
 # Disconnect of Azure
